@@ -15,6 +15,8 @@ import org.junit.Test;
 
 
 public class DeveloperDaoTest {
+    //Test method name convention
+    //https://dzone.com/articles/7-popular-unit-test-naming
 
     TestableDeveloperDao dao;
     Map<String, Integer> sqlCount = null;
@@ -26,10 +28,9 @@ public class DeveloperDaoTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    @Ignore
     public void when_row_count_does_not_match_then_rollbacks_tarnsaction() {
         List<Developer> developers = new ArrayList<>();
-        developers.add(new Developer(null, "Gautam Kohli"));
+        developers.add(new Developer(null, "Aaron Li"));
 
         int[] expect_update_fails_count = {0};
         dao.valuesToReturn = expect_update_fails_count;
@@ -39,13 +40,13 @@ public class DeveloperDaoTest {
     }
 
     @Test
-    public void when_new_student_then_creates_student() {
-        List<Developer> students = new ArrayList<>();
-        students.add(new Developer(null, "Gautam Kohli"));
+    //Not a very good test method name
+    public void testCreateNewDeveloper() {
+        List<Developer> developers = new ArrayList<>();
+        developers.add(new Developer(null, "Aaron Li"));
         int[] expect_update_success = {1};
         dao.valuesToReturn = expect_update_success;
-
-        dao.batchUpdate(students);
+        dao.batchUpdate(developers);
         int actualInsertCount = sqlCount.get("insert");
         int expectedInsertCount = 1;
         assertEquals(expectedInsertCount, actualInsertCount);
@@ -53,26 +54,24 @@ public class DeveloperDaoTest {
     }
 
     @Test
-    @Ignore
-    public void when_existing_student_then_updates_student_successfully() {
-        List<Developer> students = new ArrayList<>();
-        students.add(new Developer("001", "Mark Leo"));
+    public void when_existing_developer_then_updates_developer_successfully() {
+        List<Developer> developers = new ArrayList<>();
+        developers.add(new Developer("001", "American Captain"));
         int[] expect_update_success = {1};
         dao.valuesToReturn = expect_update_success;
 
-        dao.batchUpdate(students);
+        dao.batchUpdate(developers);
         int actualUpdateCount = sqlCount.get("update");
         int expectedUpdate = 1;
         assertEquals(expectedUpdate, actualUpdateCount);
     }
 
     @Test
-    @Ignore
-    public void when_new_and_existing_students_then_creates_and_updates_students() {
+    public void when_new_and_existing_developers_then_creates_and_updates_developers() {
         List<Developer> developers = new ArrayList<>();
-        developers.add(new Developer("001", "Mark Joffe"));
-        developers.add(new Developer(null, "John Villare"));
-        developers.add(new Developer("002", "Maria Rubinho"));
+        developers.add(new Developer("001", "Hello Kitty"));
+        developers.add(new Developer(null, ""));
+        developers.add(new Developer("002", "American Captain"));
 
         dao.batchUpdate(developers);
         int actualUpdateCount = sqlCount.get("update");
@@ -83,7 +82,8 @@ public class DeveloperDaoTest {
     class TestableDeveloperDao extends DeveloperDaoImpl {
         int[] valuesToReturn;
 
-        int[] update(String sql, List<Map<String, Object>> params) {
+        @Override
+        public int[] update(String sql, List<Map<String, Object>> params) {
             Integer count = sqlCount.get(sql);
             if (count == null) {
                 sqlCount.put(sql, params.size());
@@ -101,5 +101,6 @@ public class DeveloperDaoTest {
             }
             return val;
         }
+
     }
 }

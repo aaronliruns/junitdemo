@@ -18,7 +18,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
         List<Developer> updateList = new ArrayList<>();
 
         for (Developer developer : developers) {
-            if (developer.getName() == null) {
+            if (developer.getPsid() == null) {
                 insertList.add(developer);
             } else {
                 updateList.add(developer);
@@ -58,7 +58,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
 
     }
 
-    int[] update(String sql, List<Map<String, Object>> params) {
+    public int[] update(String sql, List<Map<String, Object>> params) {
         return new JdbcSupport().batchUpdate(sql, params);
     }
 
