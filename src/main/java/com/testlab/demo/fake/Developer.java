@@ -1,4 +1,4 @@
-package com.testlab.demo.dummy;
+package com.testlab.demo.fake;
 
 public class Developer {
 
@@ -8,6 +8,14 @@ public class Developer {
     public Developer(String psid, String name) {
         this.psid = psid;
         this.name = name;
+    }
+
+    public String getPsid() {
+        return psid;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void writeVeryComplicatedCode() {

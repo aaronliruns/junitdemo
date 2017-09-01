@@ -16,7 +16,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     public DeveloperResponse create(String name, String nameOfSprintTeam) {
         DeveloperResponse response = null;
         try {
-            int psid = developerDAO.create(name, nameOfSprintTeam);
+            String psid = developerDAO.create(name, nameOfSprintTeam);
             response = new DeveloperResponse(null, new Developer(psid, nameOfSprintTeam));
         } catch (SQLException e) {
             response = new DeveloperResponse("SQLException" + e.getMessage(), null);

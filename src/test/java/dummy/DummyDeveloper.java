@@ -3,7 +3,7 @@ package dummy;
 import com.testlab.demo.dummy.Developer;
 
 public class DummyDeveloper extends Developer {
-    public DummyDeveloper(int psid, String name) {
+    public DummyDeveloper(String psid, String name) {
         super(psid, name);
     }
 

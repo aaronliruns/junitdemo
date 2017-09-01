@@ -17,7 +17,7 @@ public class AssessmentTest {
 
     @Test
     public void averageRateHigerThanNinety() {
-        DummyDeveloper dummyDeveloper = new DummyDeveloper(1572000,"someOne");
+        DummyDeveloper dummyDeveloper = new DummyDeveloper("1572000","someOne");
         //Developer mockitoDeveloper = mock(DummyDeveloper.class);
 
         Assessment coreJava = new Assessment(dummyDeveloper,"corejava", new BigDecimal("90.0"));
